@@ -5,60 +5,66 @@ import java.util.Scanner;
 public class Atm {
 	public static void main(String[] args) {
 		
-		Console console = System.console();
+	
 		
 		
-		if(console == null) {
-			System.out.println("Bem vindo!" );
-			System.out.print("Por favor entre com seu número de conta: ");
-			Scanner scan = new Scanner(System.in);
-			int numeroContaDigitado = scan.nextInt();
+		
+		System.out.println("Bem vindo!" );
+		System.out.print("Por favor entre com seu número de conta: ");
+		Scanner scan = new Scanner(System.in);
+		String numeroConta = scan.next();
 			
-			if(contaExiste(numeroContaDigitado)) {
-				System.out.print("Digite seu PIN: ");
-				scan = new Scanner(System.in);
-				int numeroPinDigitado = scan.nextInt();
-				}
-			exibeMainMenu();
-			}
-		else {
-			System.out.println("Bem vindo!" );
-			System.out.print("Por favor entre com seu número de conta:");
-			Scanner scan = new Scanner(System.in);
-			int numeroContaDigitado = scan.nextInt();
 			
-			if(contaExiste(numeroContaDigitado)) {
-				char[] passArray = console.readPassword("Digite seu PIN: ");
-				System.out.println("Conta --->" + new String (passArray));
+		System.out.print("Digite seu PIN: ");
+		scan = new Scanner(System.in);
+		int numeroPin = scan.nextInt();
+		
+		if(numeroConta.equals("123") && numeroPin == 456 ) {
+			int opcao= 0;
+			double saldo = 0;
+			
+			while(opcao != 4) {
+				
+				// atalho para copiar as linhas crtl+ alt+ seta pra baixo
+				System.out.println("Menu");
+				System.out.println("1 - Saldo");
+				System.out.println("2 - Saque");
+				System.out.println("3 - Deposito");
+				System.out.println("4 - Sair");
+				System.out.println("Entre com opção");
+				
+				opcao = scan.nextInt();
+				
+				
+				
+				switch(opcao) {
+				case 1:
+					System.out.println("Saldo");
+					System.out.println("O saldo é "+ saldo);
+				break;
+				case 2:
+					System.out.println("Saque");
+					System.out.println("Qual o valor do saque?");
+					double saque = scan.nextDouble();
+					if(saque < saldo) {
+						saldo -= saque;
+					}
+				break;
+				case 3:
+					System.out.println("Deposito");
+					System.out.println("Qual o valor a ser depositado: ");
+					double valorDepositado = scan.nextDouble();
+					saldo += valorDepositado;
+				case 4:
+					System.out.println("Sair");
+				break;
+				default:
+					System.out.println("Número errado!");
+					
+					
+				}	
 			}
 		}
-		
-		
-	}
-	public static boolean contaExiste(int numeroConta) {
-		return true;
-	}
-	
-	public static void exibeMainMenu() {
-		
-		
-		
-		final String os = System.getProperty("os.name");
-        if (os.contains("Windows"))
-			try {
-				new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-			} catch (InterruptedException | IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		else
-			try {
-				Runtime.getRuntime().exec("clear");
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		
 	} 
 	
 }
